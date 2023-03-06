@@ -1,7 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace CatalogService.DAL.Repositories;
 
-public sealed partial class LruCache<TKey, TValue> where TKey : notnull
+public sealed partial class KvCache<TKey, TValue> where TKey : notnull
 {
     private struct Entry
     {

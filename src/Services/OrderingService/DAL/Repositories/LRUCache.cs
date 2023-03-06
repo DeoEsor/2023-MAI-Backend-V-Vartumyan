@@ -8,7 +8,7 @@ namespace OrderingService.DAL.Repositories;
 /// <typeparam name="TKey">The type of the key to the cached item.</typeparam>
 /// <typeparam name="TValue">The type of the cached item.</typeparam>
 public sealed partial class LruCache<TKey, TValue> 
-    : ILruCache<TKey, TValue> 
+    : IKvCache<TKey, TValue> 
     where TKey : notnull
 {
     /// <summary>

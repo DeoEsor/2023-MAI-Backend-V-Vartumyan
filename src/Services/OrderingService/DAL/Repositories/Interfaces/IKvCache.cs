@@ -1,6 +1,6 @@
-﻿namespace CatalogService.DAL.Repositories.Interfaces;
+﻿namespace OrderingService.DAL.Repositories.Interfaces;
 
-public interface ILruCache<in TKey, TValue>
+public interface IKvCache<in TKey, TValue>
 {
     /// <summary>
     /// Gets the value associated with the specified key.

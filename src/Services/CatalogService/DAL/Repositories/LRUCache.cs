@@ -7,8 +7,8 @@ namespace CatalogService.DAL.Repositories;
 /// </summary>
 /// <typeparam name="TKey">The type of the key to the cached item.</typeparam>
 /// <typeparam name="TValue">The type of the cached item.</typeparam>
-public sealed partial class LruCache<TKey, TValue> 
-    : ILruCache<TKey, TValue> 
+public sealed partial class KvCache<TKey, TValue> 
+    : IKvCache<TKey, TValue> 
     where TKey : notnull
 {
     /// <summary>
@@ -22,17 +22,17 @@ public sealed partial class LruCache<TKey, TValue>
     private readonly LinkedList<TKey> _cacheList;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Models.LruCache{TKey,TValue}"/> class.
+    /// Initializes a new instance of the <see cref="Models.KvCache{TKey,TValue}"/> class.
     /// </summary>
-    public LruCache()
+    public KvCache()
         : this(DefaultCapacity)
     { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Models.LruCache{TKey,TValue}"/> class.
+    /// Initializes a new instance of the <see cref="Models.KvCache{TKey,TValue}"/> class.
     /// </summary>
     /// <param name="capacity">Maximum number of elements to cache.</param>
-    public LruCache(int capacity)
+    public KvCache(int capacity)
     {
         _capacity = capacity > 0 ? capacity : DefaultCapacity;
         _cacheMap = new Dictionary<TKey, Entry>();
