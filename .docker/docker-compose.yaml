@@ -28,12 +28,12 @@ services:
   database:
     image: postgres:15-alpine
     restart: unless-stopped
-    env_file:
-      - src/Scripts/database/database.env # configure postgres
+#    env_file:
+#      - src/Scripts/database/database.env # configure postgres
     networks:
       - services-net
     volumes:
-      - src\Scripts\database:/docker-entrypoint-initdb.d/ # inital queries / commands
+#      - src\Scripts\database:/docker-entrypoint-initdb.d/ # inital queries / commands
       - database-data:/var/lib/postgresql/data/ # persist data
 
 #  rabbitmq: #event bus
