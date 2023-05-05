@@ -1,5 +1,13 @@
 version: '3'
 
+networks:
+  services-net:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local
+
 services:
 
   nginx: #reverse proxy
@@ -8,7 +16,7 @@ services:
     restart: always
     hostname: 'nginx'
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro # ro - read only
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf:ro
       - ./nginx/ssl/localhost.crt:/etc/ssl/certs/localhost.crt:ro
       - ./nginx/ssl/localhost.key:/etc/ssl/certs/localhost.key:ro
@@ -18,39 +26,39 @@ services:
       - '443:443'
   
   database:
-    image: postgres
+    image: postgres:15-alpine
     restart: unless-stopped
     env_file:
-      - database.env # configure postgres
+      - src/Scripts/database/database.env # configure postgres
     networks:
       - services-net
     volumes:
-      - Scripts\database init:/docker-entrypoint-initdb.d/ # inital queries / commands
+      - src\Scripts\database:/docker-entrypoint-initdb.d/ # inital queries / commands
       - database-data:/var/lib/postgresql/data/ # persist data
 
-  rabbitmq: #event bus
-    image: rabbitmq:3-management-alpine
-    container_name: event_bus
-    restart: unless-stopped
-    ports:
-        - "5672:5672"
-        - "15672:15672"
-    networks:
-      - services-net
-    
-  redis:
-    image: redis
-    container_name: redis
-    ports:
-      - "6379:6379"
-    networks:
-      - services-net
-    restart: always
+#  rabbitmq: #event bus
+#    image: rabbitmq:3-management-alpine
+#    container_name: event_bus
+#    restart: unless-stopped
+#    ports:
+#        - "5672:5672"
+#        - "15672:15672"
+#    networks:
+#      - services-net
+#    
+#  redis:
+#    image: redis:alpine
+#    container_name: redis
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - services-net
+#    restart: always
 
 ######### SERVICES ###########
     
   identity_service:
-    build: Services/IdentityService/
+    build: src/services/IdentityService/
     container_name: identity_service
     ports:
       - "8001:8001"
@@ -63,7 +71,7 @@ services:
       - redis
 
   catalog_service:
-    build: Services/CatalogService/
+    build: src/services/CatalogService/
     container_name: catalog_service
     ports:
       - "8002:8002"
@@ -73,7 +81,7 @@ services:
       - identity_service
   
   ordering_service:
-    build: Services/OrderingService/
+    build: src/services/OrderingService/
     container_name: ordering_service
     ports:
       - "8003:8003"
@@ -81,12 +89,4 @@ services:
       - services-net
     depends_on:
       - identity_service
-
-networks:
-  services-net:
-    driver: bridge
-
-volumes:
-  db:
-    driver: local
     
