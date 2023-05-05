@@ -1,3 +1,0 @@
-CREATE USER platops WITH PASSWORD 'platops';
-CREATE DATABASE platopsdb;
-GRANT ALL PRIVILEGES ON DATABASE platopsdb TO platops;
