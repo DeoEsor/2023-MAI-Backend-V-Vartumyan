@@ -28,35 +28,35 @@ services:
   database:
     image: postgres:15-alpine
     restart: unless-stopped
-#    env_file:
-#      - src/Scripts/database/database.env # configure postgres
+    #    env_file:
+    #      - src/Scripts/database/database.env # configure postgres
     networks:
       - services-net
     volumes:
-#      - src\Scripts\database:/docker-entrypoint-initdb.d/ # inital queries / commands
-      - database-data:/var/lib/postgresql/data/ # persist data
-
-#  rabbitmq: #event bus
-#    image: rabbitmq:3-management-alpine
-#    container_name: event_bus
-#    restart: unless-stopped
-#    ports:
-#        - "5672:5672"
-#        - "15672:15672"
-#    networks:
-#      - services-net
-#    
-#  redis:
-#    image: redis:alpine
-#    container_name: redis
-#    ports:
-#      - "6379:6379"
-#    networks:
-#      - services-net
-#    restart: always
-
-######### SERVICES ###########
+      #      - src\Scripts\database:/docker-entrypoint-initdb.d/ # inital queries / commands
+      - db:/var/lib/postgresql/data/ # persist data
     
+    #  rabbitmq: #event bus
+    #    image: rabbitmq:3-management-alpine
+    #    container_name: event_bus
+    #    restart: unless-stopped
+    #    ports:
+    #        - "5672:5672"
+    #        - "15672:15672"
+    #    networks:
+    #      - services-net
+    #    
+    #  redis:
+    #    image: redis:alpine
+    #    container_name: redis
+    #    ports:
+    #      - "6379:6379"
+    #    networks:
+    #      - services-net
+    #    restart: always
+    
+    ######### SERVICES ###########
+  
   identity_service:
     build: src/services/IdentityService/
     container_name: identity_service
@@ -67,8 +67,8 @@ services:
     depends_on:
       - nginx
       - database
-      - rabbitmq
-      - redis
+#      - rabbitmq
+#      - redis
 
   catalog_service:
     build: src/services/CatalogService/
