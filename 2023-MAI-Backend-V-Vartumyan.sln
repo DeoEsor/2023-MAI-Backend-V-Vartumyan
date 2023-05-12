@@ -13,6 +13,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingService", "src\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "src\Services\IdentityService\IdentityService.csproj", "{F8B265E9-6F78-4F68-A912-821A4CD45917}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{45B53DDA-BC17-4D56-8293-A26EA2D5BDBF}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		scripts\database.env = scripts\database.env
+		Makefile = Makefile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{57CD0EDC-0C8D-4076-9D3F-82FF9B4CCE0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingService.Test", "tests\OrderingService.Test\OrderingService.Test.csproj", "{37825AB5-500D-49EF-8A01-F706BECE327F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +37,7 @@ Global
 		{F9CF9332-0A7C-45F3-BE36-43EBC8EBE8BD} = {670C543C-C339-4FF1-B067-30D72B82DF50}
 		{82090B10-1769-4A61-B162-2A8DE10BBFDA} = {670C543C-C339-4FF1-B067-30D72B82DF50}
 		{F8B265E9-6F78-4F68-A912-821A4CD45917} = {670C543C-C339-4FF1-B067-30D72B82DF50}
+		{37825AB5-500D-49EF-8A01-F706BECE327F} = {57CD0EDC-0C8D-4076-9D3F-82FF9B4CCE0E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9CF9332-0A7C-45F3-BE36-43EBC8EBE8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,5 +52,9 @@ Global
 		{F8B265E9-6F78-4F68-A912-821A4CD45917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8B265E9-6F78-4F68-A912-821A4CD45917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8B265E9-6F78-4F68-A912-821A4CD45917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37825AB5-500D-49EF-8A01-F706BECE327F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37825AB5-500D-49EF-8A01-F706BECE327F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37825AB5-500D-49EF-8A01-F706BECE327F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37825AB5-500D-49EF-8A01-F706BECE327F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
